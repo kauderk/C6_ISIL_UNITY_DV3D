@@ -5,11 +5,11 @@ using DG.Tweening;
 
 public class DestinationScript : MonoBehaviour
 {
-    private Renderer renderer;
-    private AudioSource audio;
+    private Renderer _renderer;
+    private AudioSource _audio;
 
-    [ColorUsage(true,true)]
-    public Color originalColor,captureColor;
+    [ColorUsage(true, true)]
+    public Color originalColor, captureColor;
     public Vector3 capturePointOffset;
     [Space]
     [Header("Particle Systems")]
@@ -27,8 +27,8 @@ public class DestinationScript : MonoBehaviour
 
     private void Start()
     {
-        audio = GetComponent<AudioSource>();
-        renderer = GetComponent<Renderer>();
+        _audio = GetComponent<AudioSource>();
+        _renderer = GetComponent<Renderer>();
     }
 
     public Vector3 Point()
@@ -41,8 +41,8 @@ public class DestinationScript : MonoBehaviour
         if (!active)
             return;
 
-        audio.pitch = 1.5f;
-        audio.PlayOneShot(suckSound);
+        _audio.pitch = 1.5f;
+        _audio.PlayOneShot(suckSound);
         captureParticle.Play();
     }
 
@@ -51,13 +51,13 @@ public class DestinationScript : MonoBehaviour
         if (!active)
             return;
 
-        audio.pitch = 1;
-        audio.PlayOneShot(collectSound);
+        _audio.pitch = 1;
+        _audio.PlayOneShot(collectSound);
 
         storeParticle.Play();
         smokeParticle.Play();
         capsuleParticle.Play();
-        renderer.material.DOColor(captureColor, "_EmissionColor", .2f).OnComplete(() => renderer.material.DOColor(originalColor, "_EmissionColor", .5f));
+        _renderer.material.DOColor(captureColor, "_EmissionColor", .2f).OnComplete(() => _renderer.material.DOColor(originalColor, "_EmissionColor", .5f));
     }
 
     private void OnDrawGizmos()

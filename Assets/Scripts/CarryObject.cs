@@ -12,9 +12,9 @@ public class CarryObject : InteractiveObject
     private Coroutine destinationRoutine = default;
     private float originalAgentSpeed;
     private Renderer objectRenderer;
-    private Collider collider;
+    private Collider _collider;
     [SerializeField] private Vector3 destinationOffset;
-    [SerializeField] [ColorUsage(false,true)] private Color captureColor;
+    [SerializeField][ColorUsage(false, true)] private Color captureColor;
 
     public override void Initialize()
     {
@@ -22,7 +22,7 @@ public class CarryObject : InteractiveObject
         destination = FindObjectOfType<DestinationScript>();
         objectRenderer = GetComponentInChildren<Renderer>();
         agent = GetComponent<NavMeshAgent>();
-        collider = GetComponent<Collider>();
+        _collider = GetComponent<Collider>();
         originalAgentSpeed = agent.speed;
     }
     public override void Interact()
@@ -42,12 +42,12 @@ public class CarryObject : InteractiveObject
             agent.SetDestination(destination.Point());
             yield return new WaitUntil(() => agent.IsDone());
             agent.enabled = false;
-            collider.enabled = false;
+            _collider.enabled = false;
 
             (FindObjectOfType(typeof(PikminManager)) as PikminManager).FinishInteraction(this);
 
             //Delete UI
-            if(fractionObject!=null)
+            if (fractionObject != null)
                 Destroy(fractionObject);
 
             //Capture Animation
@@ -72,13 +72,13 @@ public class CarryObject : InteractiveObject
     {
         agent.avoidancePriority = 30;
         agent.isStopped = true;
-        if(destinationRoutine != null)
+        if (destinationRoutine != null)
             StopCoroutine(destinationRoutine);
     }
 
     private void Update()
     {
-        if(fractionObject != null)
+        if (fractionObject != null)
             fractionObject.transform.position = Camera.main.WorldToScreenPoint(transform.position + uiOffset);
     }
 

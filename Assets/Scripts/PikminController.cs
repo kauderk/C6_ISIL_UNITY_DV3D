@@ -11,7 +11,7 @@ public class PikminController : MonoBehaviour
     [SerializeField] private Vector3 targetOffset = Vector3.zero;
     private Camera cam = default;
     private LineRenderer line = default;
-    public AudioSource audio;
+    public AudioSource _audio;
     const int linePoints = 5;
 
     [Header("Visual")]

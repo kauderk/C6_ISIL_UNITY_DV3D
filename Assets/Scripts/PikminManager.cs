@@ -93,7 +93,7 @@ public class PikminManager : MonoBehaviour
                 {
                     pikmin.agent.enabled = false;
                     float delay = .05f;
-                    pikmin.transform.DOMove(pikminThrowPosition.position,delay);
+                    pikmin.transform.DOMove(pikminThrowPosition.position, delay);
 
                     pikmin.Throw(controller.hitPoint, .5f, delay);
                     controlledPikmin--;
@@ -147,7 +147,7 @@ public class PikminManager : MonoBehaviour
         if (on)
         {
             whistlePlayerParticle.Play();
-            controller.audio.Play();
+            controller._audio.Play();
             DOVirtual.Float(0, (5 / 2) + .5f, .5f, SetWhistleRadius).SetId(2);
             DOVirtual.Float(0, 1, .2f, SetWhistleRigWeight).SetId(1);
 
@@ -162,7 +162,7 @@ public class PikminManager : MonoBehaviour
         {
 
             whistlePlayerParticle.Stop();
-            controller.audio.Stop(); DOTween.Kill(2); DOTween.Kill(1); DOTween.Kill(3);
+            controller._audio.Stop(); DOTween.Kill(2); DOTween.Kill(1); DOTween.Kill(3);
             charMovement.transform.GetChild(0).DOScaleY(28, .1f);
             DOVirtual.Float(whistleRig.weight, 0, .2f, SetWhistleRigWeight);
             selectionRadius = 0;
