@@ -262,6 +262,19 @@ public struct JiggleChainData : IAnimationJobData
     }
 }
 
+internal static class PropertyUtils
+{
+    public static string ConstructConstraintDataPropertyName(string property)
+    {
+        return "m_Data." + property;
+    }
+
+    public static string ConstructCustomPropertyName(Component component, string property)
+    {
+        return component.transform.GetInstanceID() + "/" + component.GetType() + "/" + property;
+    }
+}
+
 /// JiggleChainBinder creates and destroys a JiggleChainJob given specified JiggleChainData
 public class JiggleChainBinder : AnimationJobBinder<JiggleChainJob, JiggleChainData>
 {
