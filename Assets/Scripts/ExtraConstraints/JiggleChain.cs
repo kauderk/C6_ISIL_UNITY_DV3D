@@ -269,10 +269,14 @@ internal static class PropertyUtils
         return "m_Data." + property;
     }
 
-    public static string ConstructCustomPropertyName(Component component, string property)
-    {
-        return component.transform.GetInstanceID() + "/" + component.GetType() + "/" + property;
-    }
+    // public static string ConstructCustomPropertyName(Component component, string property)
+    // {
+    //     // In WebGL.framework.js will throw  
+    //     // NullReferenceException: Object reference not set to an instance of an object.
+    //     // https://answers.unity.com/questions/989108/systemtypegettype-doesnt-work-on-webgl.html
+    //     // https://github.com/moonsharp-devs/moonsharp/pull/146/files
+    //     return component.transform.GetInstanceID() + "/" + component.GetType() + "/" + property;
+    // }
 }
 
 /// JiggleChainBinder creates and destroys a JiggleChainJob given specified JiggleChainData
